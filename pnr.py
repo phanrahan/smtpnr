@@ -51,7 +51,7 @@ class Node:
     nextn = 0
     def __init__(self, *inputs, **kwargs):
         self.name = kwargs.get('name', None)
-        self.inputs = inputs
+        self.inputs = [i for i in inputs]
 
         self.n = Node.nextn
         Node.nextn += 1
@@ -67,13 +67,16 @@ class Node:
     def __str__(self):
         return str(self.n)
 
+    def addInput(self, inp):
+        self.inputs.append(inp)
+
     def flatten(self):
          n = []
          if not self.mark:
+             self.mark = True
              for i in self.inputs:
                  n += i.flatten()
              n += [self]
-             self.mark = True
          return n
 
     def connections(self, solver, htrack=False, vtrack=False, neighbors=True):
