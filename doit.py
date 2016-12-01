@@ -25,7 +25,7 @@ def DAG():
 def doit(nodes):
     s = setup(nodes)
 
-    # s.add(root.x == 0, root.y == 0)
+    s.add(nodes[0].x == 0, nodes[0].y == 0)
 
     minarea = 100
     minm = None
